@@ -1,6 +1,7 @@
 import {NightWatchOptions} from 'nightwatch';
-import * as path from 'path';
 import paths from './paths';
+var seleniumServer = require('selenium-server')
+var chromeDriver = require('chrome-driver-standalone')
 
 const settings: NightWatchOptions = {
 	src_folders: [paths.tests],
@@ -10,14 +11,14 @@ const settings: NightWatchOptions = {
 	custom_assertions_path: [paths.assertions],
 	// globals_path: paths.globals,
 	selenium: {
-		server_path: path.join(paths.bin, 'selenium.jar'),
+		server_path: seleniumServer.path,
 		start_process: true,
 		start_session: true,
 		log_path: false,
 		host: '127.0.0.1',
 		port: 4444,
 		cli_args: {
-			'webdriver.chrome.driver': path.join(paths.bin, 'chromedriver'),
+			'webdriver.chrome.driver': chromeDriver.path,
 		},
 	},
 	test_settings: {
