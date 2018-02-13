@@ -1,7 +1,9 @@
 import {NightWatchOptions} from 'nightwatch';
 import paths from './paths';
-var seleniumServer = require('selenium-server')
-var chromeDriver = require('chrome-driver-standalone')
+
+var seleniumServer = require('selenium-server');
+var chromeDriver = require('chrome-driver-standalone');
+var geckoDriver = require('geckodriver');
 
 const settings: NightWatchOptions = {
 	src_folders: [paths.tests],
@@ -19,6 +21,7 @@ const settings: NightWatchOptions = {
 		port: 4444,
 		cli_args: {
 			'webdriver.chrome.driver': chromeDriver.path,
+			'webdriver.gecko.driver': geckoDriver.path,
 		},
 	},
 	test_settings: {
@@ -51,6 +54,14 @@ const settings: NightWatchOptions = {
 		chrome: {
 			desiredCapabilities: {
 				browserName: 'chrome',
+				javascriptEnabled: true,
+				acceptSslCerts: true,
+			},
+		},
+		firefox: {
+			desiredCapabilities: {
+				browserName: 'firefox',
+				marionette: true,
 				javascriptEnabled: true,
 				acceptSslCerts: true,
 			},
